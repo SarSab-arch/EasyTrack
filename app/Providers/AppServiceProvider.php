@@ -19,11 +19,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-     if (Schema::hasTable('settings')) {
-    $settings = Setting::first();
-    view()->share('settings', $settings);
-}
+ public function boot(): void
+{
+
+    if (!app()->runningInConsole() && Schema::hasTable('settings')) {
+        $settings = Setting::first();
+         View()->share('settings', $settings);
     }
+}
 }
