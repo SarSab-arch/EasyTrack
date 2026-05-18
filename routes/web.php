@@ -65,3 +65,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/run-migrations', function () {
+    try {
+        Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+        return 'قاعدة البيانات تم بناؤها وضخ البيانات بنجاح تام! 🎉';
+    } catch (\Exception $e) {
+        return 'حدث خطأ: ' . $e->getMessage();
+    }
+});
