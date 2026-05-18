@@ -3,10 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Setting;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,15 +19,18 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-public function boot(): void
-{
-    // حيلة ذكية: إذا كان جدول المستخدمين غير موجود، قم بعمل مايجريشن فوراً!
-    if (!Schema::hasTable('users')) {
+    public function boot(): void
+    {
+        // حيلة ذكية لتهجير البيانات تلقائياً عند أول إقلاع للموقع
         try {
-            Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+            if (!Schema::hasTable('users')) {
+                Artisan::call('migrate:fresh', [
+                    '--seed' => true,
+                    '--force' => true,
+                ]);
+            }
         } catch (\Exception $e) {
-            // تجنب انهيار الموقع إذا كانت القاعدة لم ترتبط بعد
+            // تجنب انهيار الموقع إذا لم تكن قاعدة البيانات جاهزة بعد
         }
     }
-}
 }
