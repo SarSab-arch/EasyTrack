@@ -19,4 +19,9 @@ export default defineConfig({
             ignored: ['**/storage/framework/views/**'],
         },
     },
+    // 👇 أضيفي هذا الجزء الصغير لضمان استقرار مسار التوليد على السيرفر
+    build: {
+        outDir: 'public/build',
+        emptyOutDir: true,
+    }
 });
