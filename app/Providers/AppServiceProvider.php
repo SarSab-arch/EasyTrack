@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,12 +21,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
- public function boot(): void
+public function boot(): void
 {
-
-    if (!app()->runningInConsole() && Schema::hasTable('settings')) {
-        $settings = Setting::first();
-         View()->share('settings', $settings);
+    // حيلة ذكية: إذا كان جدول المستخدمين غير موجود، قم بعمل مايجريشن فوراً!
+    if (!Schema::hasTable('users')) {
+        try {
+            Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+        } catch (\Exception $e) {
+            // تجنب انهيار الموقع إذا كانت القاعدة لم ترتبط بعد
+        }
     }
 }
 }
