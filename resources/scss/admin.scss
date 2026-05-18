@@ -1,0 +1,80 @@
+// 1. مصفوفة متغيرات الألوان الموحدة (Modern Dark UI)
+$bg-dark: #0f172a;       // الخلفية الأساسية للموقع (Slate Dark)
+$card-bg: #1e293b;       // خلفية البطاقات، الجداول، والسايدبار
+$accent-cyan: #06b6d4;   // لون التمييز السياني / التركواز المفضّل
+$border-color: #334155;  // لون الفواصل والحدود الأنيقة
+$text-main: #f8fafc;     // لون النصوص الأساسية الواضحة
+$text-muted: #94a3b8;    // لون النصوص الثانوية والتلميحات
+
+// 2. التنسيق العام لـ جسم الصفحة
+body {
+    background-color: $bg-dark;
+    color: $text-main;
+    font-family: 'Cairo', 'Inter', sans-serif;
+    direction: rtl; // دعم التوجيه البرمجي العربي
+    margin: 0;
+    padding: 0;
+}
+
+// 3. هيكلة الـ Layout بالكامل (لحماية السايدبار والمحتوى من الانكسار)
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+
+    // دمج التنسيقين ليقبل الـ ID والـ Class معاً دون أي تضارب
+    #sidebar, .admin-sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        background-color: $card-bg;
+        border-left: 1px solid $border-color; // فاصل جهة اليسار للـ RTL
+        min-height: 100vh;
+        transition: all 0.3s ease;
+
+        .sidebar-header {
+            padding: 20px;
+            background: darken($card-bg, 4%);
+            text-align: center;
+            border-bottom: 1px solid $accent-cyan;
+        }
+
+        // دعم كل من القوائم العادية (ul li a) وروابط البوتستراب القياسية (nav-link)
+        ul li a, .nav-link {
+            padding: 15px 20px;
+            display: block;
+            color: $text-muted;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+
+            &:hover, &.active {
+                color: $accent-cyan;
+                background: rgba(6, 182, 212, 0.1); // تأثير زجاجي ناعم بالسيان
+                border-radius: 8px;
+                padding-right: 25px; // الإزاحة الرشيق الأصلية عند التمرير
+            }
+        }
+    }
+
+    // منطقة المحتوى الأساسية بجانب السايدبار
+    #content {
+        width: 100%;
+        padding: 25px;
+        min-height: 100vh;
+    }
+}
+
+// 4. تنسيق البطاقات (Cards) الاحترافي مع تأثير الحركية (Hover Animation)
+.custom-card {
+    background-color: $card-bg;
+    border: 1px solid $border-color;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-5px); 
+        border-color: $accent-cyan;  
+    }
+}
