@@ -8,12 +8,21 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController; 
 use App\Http\Controllers\Auth\ProfileController;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | 1. مسارات العميل (الواجهة الأمامية)
 |--------------------------------------------------------------------------
 */
+
+
+// Force a fresh deploy to fix cache 127.0.0.1
+
+Route::get('/clear-all', function() {
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    return "Done! Cache cleared successfully. 🚀";
+});
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
 Route::get('/services', [FrontController::class, 'services'])->name('client.services');
 
@@ -64,14 +73,4 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // الملف الشخصي (Profile)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-});
-use Illuminate\Support\Facades\Artisan;
-
-Route::get('/run-migrations', function () {
-    try {
-        Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
-        return 'قاعدة البيانات تم بناؤها وضخ البيانات بنجاح تام! 🎉';
-    } catch (\Exception $e) {
-        return 'حدث خطأ: ' . $e->getMessage();
-    }
 });
