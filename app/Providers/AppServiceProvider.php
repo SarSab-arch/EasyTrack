@@ -21,18 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
    public function boot(): void
 {
-    // سطر سحري يمسح كاش الإعدادات فوراً عند إقلاع السيرفر
-    \Illuminate\Support\Facades\Artisan::call('config:clear');
-
-    try {
-        if (!\Illuminate\Support\Facades\Schema::hasTable('users')) {
-            \Illuminate\Support\Facades\Artisan::call('migrate:fresh', [
-                '--seed' => true,
-                '--force' => true,
-            ]);
-        }
-    } catch (\Exception $e) {
-        // تجنب الانهيار
-    }
+  
 }
 }
