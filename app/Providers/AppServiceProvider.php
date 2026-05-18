@@ -19,18 +19,20 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        // حيلة ذكية لتهجير البيانات تلقائياً عند أول إقلاع للموقع
-        try {
-            if (!Schema::hasTable('users')) {
-                Artisan::call('migrate:fresh', [
-                    '--seed' => true,
-                    '--force' => true,
-                ]);
-            }
-        } catch (\Exception $e) {
-            // تجنب انهيار الموقع إذا لم تكن قاعدة البيانات جاهزة بعد
+   public function boot(): void
+{
+    // سطر سحري يمسح كاش الإعدادات فوراً عند إقلاع السيرفر
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+
+    try {
+        if (!\Illuminate\Support\Facades\Schema::hasTable('users')) {
+            \Illuminate\Support\Facades\Artisan::call('migrate:fresh', [
+                '--seed' => true,
+                '--force' => true,
+            ]);
         }
+    } catch (\Exception $e) {
+        // تجنب الانهيار
     }
+}
 }
