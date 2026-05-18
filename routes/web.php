@@ -8,21 +8,12 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController; 
 use App\Http\Controllers\Auth\ProfileController;
-use Illuminate\Support\Facades\Artisan;
+
 /*
 |--------------------------------------------------------------------------
 | 1. مسارات العميل (الواجهة الأمامية)
 |--------------------------------------------------------------------------
 */
-
-
-// Force a fresh deploy to fix cache 127.0.0.1
-
-Route::get('/clear-all', function() {
-    Artisan::call('config:clear');
-    Artisan::call('cache:clear');
-    return "Done! Cache cleared successfully. 🚀";
-});
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
 Route::get('/services', [FrontController::class, 'services'])->name('client.services');
 
