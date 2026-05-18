@@ -1,0 +1,1 @@
+web: php artisan migrate --seed --force && heroku-php-nginx public/
