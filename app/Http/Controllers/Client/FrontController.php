@@ -57,7 +57,8 @@ class FrontController extends Controller
     public function orderSuccess($tracking_id)
     {
         $task = Task::where('tracking_id', $tracking_id)->firstOrFail();
-        return view('client.order_success', compact('task'));
+        $settings = \App\Models\Setting::first();
+        return view('client.order_success', compact('task', 'settings'));
     }
 
     public function services() 
@@ -70,7 +71,8 @@ class FrontController extends Controller
     public function track($tracking_id)
     {
         $task = Task::with('category')->where('tracking_id', $tracking_id)->firstOrFail();
-        return view('client.track', compact('task'));
+        $settings = \App\Models\Setting::first();
+        return view('client.track', compact('task' ,'settings'));
     }
 
     public function trackSearch(Request $request) 
@@ -92,7 +94,8 @@ class FrontController extends Controller
         if ($tasks->count() == 1) {
             return redirect()->route('client.track', ['tracking_id' => $tasks->first()->tracking_id]);
         }
+        $settings = \App\Models\Setting::first();
 
-        return view('client.my_orders', compact('tasks'));
+        return view('client.my_orders', compact('tasks','settings'));
     }
 }
