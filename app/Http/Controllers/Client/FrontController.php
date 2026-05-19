@@ -22,7 +22,8 @@ class FrontController extends Controller
     public function orderForm($id)
     {
         $category = Category::findOrFail($id);
-        return view('client.order', compact('category'));
+        $settings = \App\Models\Setting::first();
+        return view('client.order', compact('category','settings'));
     }
 
     public function store(Request $request)
