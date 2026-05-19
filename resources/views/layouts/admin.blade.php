@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ $settings->site_name ?? 'EasyTrack' }} - @yield('title')</title>
-    <link rel="icon" type="image/png" href="{{ asset('storage/' . ($settings->site_logo ?? 'assets/img/logo.png')) }}">
+    <link rel="icon" type="image/png" href="{{ $settings?->site_logo ? asset('storage/' . $settings->site_logo) : asset('assets/img/logo.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     @vite(['resources/scss/admin.scss', 'resources/js/app.js'])
 </head>
@@ -11,11 +11,11 @@
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header d-flex align-items-center gap-2 px-3 py-3">
-                <img src="{{ asset('storage/' . ($settings->site_logo ?? 'assets/img/logo.png')) }}" height="40" alt="Logo">
+                <img src="{{ $settings?->site_logo ? asset('storage/' . $settings->site_logo) : asset('assets/img/logo.png') }}" height="40" alt="Logo">
                 <h3 class="m-0 fs-5 text-white">{{ $settings->site_name ?? 'EasyTrack' }}</h3>
             </div>
 
-           <ul class="list-unstyled components">
+            <ul class="list-unstyled components">
     <li>
         <a href="{{ route('admin.dashboard') }}">
             📊 <span>لوحة القيادة</span>
