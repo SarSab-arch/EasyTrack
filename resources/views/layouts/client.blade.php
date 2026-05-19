@@ -14,16 +14,22 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <body class="bg-dark text-white">
 
-   <header class="navbar navbar-expand-lg navbar-dark sticky-top bg-blur">
+  <header class="navbar navbar-expand-lg navbar-dark sticky-top bg-blur">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('welcome') }}">
-            <img src="{{ asset('storage/' . ($settings->site_logo ?? 'assets/img/logo.png')) }}" height="40" alt="Logo">
-            <span class="fw-bold">{{ $settings->site_name ?? 'EasyTrack' }}</span>
+            <img src="{{ $settings?->site_logo ? asset('storage/' . $settings->site_logo) : asset('assets/img/logo.png') }}" height="40" alt="Logo">
+            <span class="fw-bold">{{ $settings?->site_name ?? 'EasyTrack' }}</span>
         </a>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center gap-2 order-lg-last">
+            <a href="https://wa.me/YOUR_NUMBER" target="_blank" class="btn btn-success btn-sm d-flex align-items-center gap-1 text-white">
+                <i class="fab fa-whatsapp"></i> واتساب
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
@@ -85,6 +91,6 @@
         </small>
     </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
