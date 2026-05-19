@@ -23,7 +23,7 @@
         
         <div class="d-flex align-items-center gap-2 order-lg-last">
             <a href="https://wa.me/YOUR_NUMBER" target="_blank" class="btn btn-success btn-sm d-flex align-items-center gap-1 text-white">
-                <i class="fab fa-whatsapp"></i> واتساب
+                <i class="fab fa-whatsapp"></i> WhatsApp
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,11 +49,7 @@
         </div>
     </div>
 </header>
-            @if($settings?->whatsapp_number)
-                <a href="https://wa.me/{{ $settings->whatsapp_number }}" target="_blank" class="btn btn-cyan btn-sm">واتساب</a>
-            @endif
-        </div>
-    </header>
+     
 
     @yield('content')
 
