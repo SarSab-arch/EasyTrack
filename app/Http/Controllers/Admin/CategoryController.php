@@ -97,8 +97,8 @@ class CategoryController extends Controller
 
     // 3. جلب أحدث 3 خدمات مضافة لتغذية الجدول الأسفل (وهذا هو المتغير الذي سبب المشكلة)
     $latestCategories = \App\Models\Category::latest()->take(3)->get();
-
+    $settings = \App\Models\Setting::first();
     // 4. تمرير كافة المتغيرات إلى الـ Blade معاً بأمان
-    return view('admin.dashboard', compact('categoriesCount', 'activeTasksCount', 'latestCategories'));
+    return view('admin.dashboard', compact('categoriesCount', 'activeTasksCount', 'latestCategories','settings'));
 }
 }

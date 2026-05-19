@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>{{ $settings->site_name ?? 'EasyTrack' }} - @yield('title')</title>
+    <title>{{ $settings?->site_name ?? 'EasyTrack' }} - @yield('title')</title>
     <link rel="icon" type="image/png" href="{{ $settings?->site_logo ? asset('storage/' . $settings->site_logo) : asset('assets/img/logo.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     @vite(['resources/scss/admin.scss', 'resources/js/app.js'])
