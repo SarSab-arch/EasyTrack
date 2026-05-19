@@ -12,7 +12,7 @@
         <nav id="sidebar">
             <div class="sidebar-header d-flex align-items-center gap-2 px-3 py-3">
                 <img src="{{ $settings?->site_logo ? asset('storage/' . $settings->site_logo) : asset('assets/img/logo.png') }}" height="40" alt="Logo">
-                <h3 class="m-0 fs-5 text-white">{{ $settings->site_name ?? 'EasyTrack' }}</h3>
+                <h3 class="m-0 fs-5 text-white">{{ $settings?->site_name ?? 'EasyTrack' }}</h3>
             </div>
 
             <ul class="list-unstyled components">

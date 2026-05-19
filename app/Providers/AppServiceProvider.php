@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
   if (config('app.env') === 'production' || env('APP_URL') !== 'http://localhost') {
         URL::forceScheme('https');
     }
+    \Illuminate\Support\Facades\View::share('settings', \App\Models\Setting::first());
 }
 }
